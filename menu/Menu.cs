@@ -4,20 +4,30 @@ namespace RestaurantReservation
 {
   internal class Menu
   {
-    internal int returnMenu()
+
+    internal void greeting()
     {
       Console.Clear();
       Console.OutputEncoding = Encoding.UTF8;
       Console.CursorVisible = false;
       Console.ForegroundColor = ConsoleColor.Cyan;
 
-
       Console.WriteLine("Welcome to the restaurant WithoutAName");
-      Console.WriteLine("Do you have a reservation with us?");
+      System.Threading.Thread.Sleep(900);
+      Console.WriteLine("To get started, please state your name below:");
+    }
+
+    internal void hasReservation()
+    {
+
+    }
+    internal int returnMenuOptions()
+    {
+      System.Threading.Thread.Sleep(300);
       Console.ResetColor();
       Console.WriteLine("\n Use arrow Up/Down to navigate and press \u001b[32mEnter/Return\u001b[0m to select:");
 
-      (int left, int top) = Console.GetCursorPosition();
+      // (int left, int top) = Console.GetCursorPosition();
       var option = 1;
       var decorator = "\u001b[32m";
       ConsoleKeyInfo key;
@@ -25,7 +35,7 @@ namespace RestaurantReservation
 
       while (!isSelected)
       {
-        Console.SetCursorPosition(left, top);
+        // Console.SetCursorPosition(left, top);
 
         Console.WriteLine($"{(option == 1 ? decorator : "   ")}Yes\u001b[0m");
         Console.WriteLine($"{(option == 2 ? decorator : "   ")}No\u001b[0m");

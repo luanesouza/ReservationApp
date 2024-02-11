@@ -9,11 +9,9 @@ namespace RestaurantReservation
             Menu menu = new();
             try
             {
-                Console.WriteLine("Welcome to our restaurant! To get started, please state your name below:");
+                menu.greeting();
                 var name = Console.ReadLine();
 
-                var option = menu.returnMenu();
-                Console.WriteLine(option);
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -22,13 +20,17 @@ namespace RestaurantReservation
                 }
 
                 var user = new User(name);
-
-                bool hasReservation = ReservationService.HasReservation(user);
-
+                Console.WriteLine("Do you have a reservation with us?");
+                var option = menu.returnMenuOptions();
                 if (option == 1)
                 {
-                    Console.WriteLine("Let's chech that for you");
+                    Console.WriteLine("We'll check that for you");
+                    System.Threading.Thread.Sleep(300);
                     Console.WriteLine("Loading...");
+                    System.Threading.Thread.Sleep(100);
+
+                    bool hasReservation = ReservationService.HasReservation(user);
+
                     if (hasReservation)
                     {
                         Console.WriteLine("You are all set!");
