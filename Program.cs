@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RestaurantReservation;
 
 namespace RestaurantReservation
 {
     public class Program
     {
-        static void Main()
+        public static void Main()
         {
+            Menu menu = new();
             try
             {
                 Console.WriteLine("Welcome to our restaurant! To get started, please state your name below:");
-                string name = Console.ReadLine();
+                var name = Console.ReadLine();
+
+                var option = menu.returnMenu();
+                Console.WriteLine(option);
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -22,13 +25,22 @@ namespace RestaurantReservation
 
                 bool hasReservation = ReservationService.HasReservation(user);
 
-                if (hasReservation)
+                if (option == 1)
                 {
-                    Console.WriteLine("You're all set!");
+                    Console.WriteLine("Let's chech that for you");
+                    Console.WriteLine("Loading...");
+                    if (hasReservation)
+                    {
+                        Console.WriteLine("You are all set!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("We couldn't find your reservation, but we can get you a table right away.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("No reservation found.");
+                    Console.WriteLine("Would you like to make a reservation?");
                 }
             }
             catch (Exception ex)
@@ -53,11 +65,17 @@ namespace RestaurantReservation
     public static class ReservationService
     {
         // Simulate reservations data
-        private static readonly List<string> ReservationList = new List<string> { "Alice", "Bob", "Charlie" };
+        private static List<string> ReservationList = new List<string> { "Alice", "Bob", "Charlie" };
 
         public static bool HasReservation(User user)
         {
             return ReservationList.Contains(user.Name);
+        }
+
+        public static bool AddReservation(User user)
+        {
+            ReservationList.Add(user.Name);
+            return HasReservation(user);
         }
     }
 }
