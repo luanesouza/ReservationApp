@@ -5,7 +5,7 @@ namespace RestaurantReservation
   internal class Menu
   {
 
-    internal void greeting()
+    internal void Greeting()
     {
       Console.Clear();
       Console.OutputEncoding = Encoding.UTF8;
@@ -17,12 +17,20 @@ namespace RestaurantReservation
       Console.WriteLine("To get started, please state your name below:");
     }
 
-    internal void hasReservation()
+    internal string UserName()
     {
+      var name = Console.ReadLine();
 
+      if (string.IsNullOrWhiteSpace(name))
+      {
+        Console.WriteLine("Invalid name. Please provide a valid name.");
+        return UserName();
+      }
+      return name;
     }
-    internal int returnMenuOptions()
+    internal int MenuOptions()
     {
+      Console.ForegroundColor = ConsoleColor.Cyan;
       System.Threading.Thread.Sleep(300);
       Console.ResetColor();
       Console.WriteLine("\n Use arrow Up/Down to navigate and press \u001b[32mEnter/Return\u001b[0m to select:");

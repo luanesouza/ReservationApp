@@ -9,19 +9,13 @@ namespace RestaurantReservation
             Menu menu = new();
             try
             {
-                menu.greeting();
-                var name = Console.ReadLine();
-
-
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    Console.WriteLine("Invalid name. Please provide a valid name.");
-                    return;
-                }
+                menu.Greeting();
+                Console.ResetColor();
+                var name = menu.UserName();
 
                 var user = new User(name);
                 Console.WriteLine("Do you have a reservation with us?");
-                var option = menu.returnMenuOptions();
+                var option = menu.MenuOptions();
                 if (option == 1)
                 {
                     Console.WriteLine("We'll check that for you");
